@@ -31,7 +31,14 @@ app.get("/:str", function (request, response) {
       response.json({unix : parseInt(str),
                 natural : unixToNatural(parseInt(str)*1000)});
     }
-  else 
+  else if(moment(str).isValid())
+    {
+      response.json({
+        unix : parseInt(moment(str).format("X")),
+        natural : moment(str).format("MMMM D, YYYY")
+      });
+    }
+  else
     {
       response.json({
         unix : null,
