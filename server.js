@@ -15,7 +15,7 @@ app.get("/", function (request, response) {
 
 function unixToNatural(unixtime)
 {
-  var natural;
+  var natural = strftime('%B %e, %Y', new Date(unixtime));
   return natural;
 }
 
@@ -26,7 +26,9 @@ function naturalToUnix(natural)
 }
 
 app.get("/:str", function (request, response) {
-  response.send();
+  var str = request.params.str;
+  response.json({unix : parseInt(str),
+                natural : unixToNatural(parseInt(str))});
 });
 
 // listen for requests :)
