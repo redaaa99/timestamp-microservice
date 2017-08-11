@@ -11,8 +11,7 @@
   },
   "dependencies": {
     "express": "^4.15.3",
-    "jade": "^1.11.0",
-    "strftime": "^0.10.0"
+    "jade": "^1.11.0"
   },
   "engines": {
     "node": "8.x"

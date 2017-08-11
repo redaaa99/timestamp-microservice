@@ -4,7 +4,7 @@
 // init project
 var express = require('express');
 var app = express();
-var strftime = require('strftime');
+var moment = require("moment");
 
 app.use(express.static(__dirname + '../public'));
 app.set('view engine', 'jade');
@@ -15,8 +15,7 @@ app.get("/", function (request, response) {
 
 function unixToNatural(unixtime)
 {
-  var natural = strftime('%B %e, %Y', new Date(unixtime));
-  return natural;
+  return moment.unix(unixtime).format("MMMM D, YYYY");
 }
 
 function naturalToUnix(natural)
@@ -24,11 +23,22 @@ function naturalToUnix(natural)
   var unixtime;
   return unixtime;
 }
-
+var regNums = /^\d+$/;
 app.get("/:str", function (request, response) {
   var str = request.params.str;
-  response.json({unix : parseInt(str),
-                natural : unixToNatural(parseInt(str))});
+  if(regNums.test(str))
+    {
+      response.json({unix : parseInt(str),
+                natural : unixToNatural(parseInt(str)*1000)});
+    }
+  else 
+    {
+      response.json({
+        unix : null,
+        natural : null
+      });
+    }
+  
 });
 
 // listen for requests :)
