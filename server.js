@@ -4,31 +4,30 @@
 // init project
 var express = require('express');
 var app = express();
+var strftime = require('strftime');
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + '../public'));
 app.set('view engine', 'jade');
 
 app.get("/", function (request, response) {
-  response.render('index', function(err, html) {
-  response.send(html);
-});
+  response.render('index');
 });
 
-app.get("/dreams", function (request, response) {
-  response.send(dreams);
-});
+function unixToNatural(unixtime)
+{
+  var natural;
+  return natural;
+}
 
-app.post("/dreams", function (request, response) {
-  dreams.push(request.query.dream);
-  response.sendStatus(200);
-});
+function naturalToUnix(natural)
+{
+  var unixtime;
+  return unixtime;
+}
 
-// Simple in-memory store for now
-var dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
+app.get("/:str", function (request, response) {
+  response.send();
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
